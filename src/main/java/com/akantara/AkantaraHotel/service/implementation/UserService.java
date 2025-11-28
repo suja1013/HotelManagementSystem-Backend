@@ -45,7 +45,7 @@ public class UserService implements UserServiceInterface {
                 user.setRole("USER");
             }
             if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-                throw new CustomException(user.getEmail() + "User Already Exists");
+                throw new CustomException("User Already Exists");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userRepository.save(user);
