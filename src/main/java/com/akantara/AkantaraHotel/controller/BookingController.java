@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bookings")
 public class BookingController {
 
-    // Injects the BookingRepository to access booking data from the database
+    // Injects the BookingService class
     @Autowired
     private BookingServiceInterface bookingService;
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    // Injects the UserRepository to access user data from the database
+    // Injects the UserService class
     @Autowired
     private UserServiceInterface userService;
 

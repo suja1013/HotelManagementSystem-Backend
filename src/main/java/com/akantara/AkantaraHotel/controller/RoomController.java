@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/rooms")
 public class RoomController {
 
-    // Injects the RoomRepository to access room data from the database
+    // Injects the RoomService class
     @Autowired
     private RoomServiceInterface roomService;
 

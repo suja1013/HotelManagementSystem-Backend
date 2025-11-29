@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class AuthController {
 
-    // Injects the UserRepository to access user data from the database
+    // Injects the UserService class
     @Autowired
     private UserServiceInterface userService;
 
