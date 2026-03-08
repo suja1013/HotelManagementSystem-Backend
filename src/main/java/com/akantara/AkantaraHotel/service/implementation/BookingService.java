@@ -15,6 +15,8 @@ import com.akantara.AkantaraHotel.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -23,11 +25,11 @@ public class BookingService implements BookingServiceInterface {
     @Autowired
     private BookingRepository bookingRepository;
     @Autowired
-    private RoomServiceInterface roomService;
-    @Autowired
     private RoomRepository roomRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private DynamicPricingService dynamicPricingService;
 
 
     // Saves a new booking for a given room and user
@@ -55,8 +57,16 @@ public class BookingService implements BookingServiceInterface {
 
             bookingRequest.setRoom(room);
             bookingRequest.setUser(user);
+            BigDecimal dynamicPrice = dynamicPricingService.calculateDynamicPrice(
+                    room.getRoomPrice(), bookingRequest.getCheckInDate());
+            long numberOfNights = bookingRequest.getCheckInDate()
+                    .until(bookingRequest.getCheckOutDate(), java.time.temporal.ChronoUnit.DAYS);
+            BigDecimal totalPrice = dynamicPrice.multiply(BigDecimal.valueOf(numberOfNights));
+            bookingRequest.setTotalPrice(totalPrice);
+
             String bookingConfirmationCode = Utils.generateRandomConfirmationCode( );
             bookingRequest.setBookingConfirmationCode(bookingConfirmationCode);
+
             bookingRepository.save(bookingRequest);
             response.setStatusCode(200);
             response.setMessage("successful");

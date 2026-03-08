@@ -4,6 +4,7 @@ package com.akantara.AkantaraHotel.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -23,6 +24,8 @@ public class BookingDTO {
     private int guestTotal;
 
     private String bookingConfirmationCode;
+
+    private BigDecimal totalPrice;
 
     private UserDTO user;
 
@@ -78,6 +81,14 @@ public class BookingDTO {
 
     public String getBookingConfirmationCode() {
         return bookingConfirmationCode;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public void setBookingConfirmationCode(String bookingConfirmationCode) {
