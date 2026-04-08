@@ -61,6 +61,7 @@ public class Utils {
         bookingDTO.setGuestTotal(booking.getGuestTotal());
         bookingDTO.setBookingConfirmationCode(booking.getBookingConfirmationCode());
         bookingDTO.setTotalPrice(booking.getTotalPrice());
+        bookingDTO.setCancellationRefund(booking.getCancellationRefund());
         return bookingDTO;
     }
 
@@ -91,6 +92,7 @@ public class Utils {
         bookingDTO.setGuestTotal(booking.getGuestTotal());
         bookingDTO.setBookingConfirmationCode(booking.getBookingConfirmationCode());
         bookingDTO.setTotalPrice(booking.getTotalPrice());
+        bookingDTO.setCancellationRefund(booking.getCancellationRefund());
         if (mapUser) {
             bookingDTO.setUser(Utils.mapUserEntityToUserDTO(booking.getUser()));
         }

@@ -3,6 +3,7 @@ package com.akantara.AkantaraHotel.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -15,6 +16,7 @@ public class Response {
     private String role;
     private String expirationTime;
     private String bookingConfirmationCode;
+    private BigDecimal cancellationRefund;
     private UserDTO user;
     private RoomDTO room;
     private BookingDTO booking;
@@ -118,4 +120,11 @@ public class Response {
         this.statusCode = statusCode;
     }
 
+    public BigDecimal getCancellationRefund() {
+        return cancellationRefund;
+    }
+
+    public void setCancellationRefund(BigDecimal cancellationRefund) {
+        this.cancellationRefund = cancellationRefund;
+    }
 }

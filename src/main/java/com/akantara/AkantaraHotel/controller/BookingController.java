@@ -3,6 +3,7 @@ package com.akantara.AkantaraHotel.controller;
 import com.akantara.AkantaraHotel.dto.Response;
 import com.akantara.AkantaraHotel.entity.Booking;
 import com.akantara.AkantaraHotel.service.ServiceInterface.BookingServiceInterface;
+import com.akantara.AkantaraHotel.service.ServiceInterface.CancellationServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +16,9 @@ public class BookingController {
     // Injects the BookingService class
     @Autowired
     private BookingServiceInterface bookingService;
+
+    @Autowired
+    private CancellationServiceInterface cancellationService;
 
     // Creates a new booking for a specific room and user and can be accessed by both USER and ADMIN
     @PostMapping("/book-room/{roomId}/{userId}")
@@ -51,5 +55,19 @@ public class BookingController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
+    // Preview refund amount before confirming cancellation (USER or ADMIN)
+    @GetMapping("/cancel-preview/{bookingId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    public ResponseEntity<Response> previewCancellation(@PathVariable Long bookingId) {
+        Response response = cancellationService.previewCancellation(bookingId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 
+    // Confirm cancellation — computes refund, deletes booking (USER or ADMIN)
+    @DeleteMapping("/cancel/{bookingId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    public ResponseEntity<Response> cancelBooking(@PathVariable Long bookingId) {
+        Response response = cancellationService.cancelBooking(bookingId);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
 }
