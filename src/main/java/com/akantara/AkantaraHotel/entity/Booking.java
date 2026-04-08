@@ -40,6 +40,8 @@ public class Booking {
 
     private BigDecimal totalPrice;
 
+    private BigDecimal cancellationRefund;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
@@ -132,6 +134,14 @@ public class Booking {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public BigDecimal getCancellationRefund() {
+        return cancellationRefund;
+    }
+
+    public void setCancellationRefund(BigDecimal cancellationRefund) {
+        this.cancellationRefund = cancellationRefund;
     }
 
 

@@ -45,10 +45,8 @@ public class DynamicPricingService {
         return dynamicPrice;
     }
 
-    /**
-     * Returns an informational breakdown of the pricing factors for a given request.
-     * Used by the /pricing/calculate endpoint to give transparency to callers.
-     */
+     //Returns an informational breakdown of the pricing factors for a given request.
+     //Used by the /pricing/calculate endpoint to give transparency to callers.
     public PricingBreakdown getPricingBreakdown(LocalDate checkInDate) {
         double demandFactor  = calculateDemandFactor();
         double timeFactor    = calculateTimeFactor(checkInDate);
@@ -56,13 +54,13 @@ public class DynamicPricingService {
         return new PricingBreakdown(demandFactor, timeFactor, weatherFactor);
     }
 
-    // ─── Factor calculation helpers ────────────────────────────────────────────
+    // Factor calculation helpers
 
-    /**
-     * DemandFactor: based on the percentage of rooms that are currently unbooked.
-     * Uses the existing RoomRepository to count total rooms and BookingRepository
-     * for currently active bookings — no original logic is changed.
-     */
+
+     //DemandFactor: based on the percentage of rooms that are currently unbooked.
+     // Uses the existing RoomRepository to count total rooms and BookingRepository
+     // for currently active bookings — no original logic is changed.
+
     private double calculateDemandFactor() {
         long totalRooms = roomRepository.count();
         if (totalRooms == 0) return 1.0;
@@ -86,9 +84,9 @@ public class DynamicPricingService {
         }
     }
 
-    /**
-     * TimeFactor: based on days between today and the requested check-in date.
-     */
+
+     //TimeFactor: based on days between today and the requested check-in date.
+
     private double calculateTimeFactor(LocalDate checkInDate) {
         long daysUntilCheckIn = ChronoUnit.DAYS.between(LocalDate.now(), checkInDate);
 
@@ -103,11 +101,9 @@ public class DynamicPricingService {
         }
     }
 
-    // ─── Nested result record ──────────────────────────────────────────────────
+    // Nested result record
 
-    /**
-     * Immutable data carrier for the pricing breakdown response.
-     */
+     // Immutable data carrier for the pricing breakdown response.
     public record PricingBreakdown(double demandFactor, double timeFactor, double weatherFactor) {
 
         /** Convenience method: returns the combined multiplier. */

@@ -27,6 +27,8 @@ public class BookingDTO {
 
     private BigDecimal totalPrice;
 
+    private BigDecimal cancellationRefund;
+
     private UserDTO user;
 
     private RoomDTO room;
@@ -93,6 +95,14 @@ public class BookingDTO {
 
     public void setBookingConfirmationCode(String bookingConfirmationCode) {
         this.bookingConfirmationCode = bookingConfirmationCode;
+    }
+
+    public BigDecimal getCancellationRefund() {
+        return cancellationRefund;
+    }
+
+    public void setCancellationRefund(BigDecimal cancellationRefund) {
+        this.cancellationRefund = cancellationRefund;
     }
 
     public UserDTO getUser() {

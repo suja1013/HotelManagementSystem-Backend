@@ -24,13 +24,8 @@ public class PricingController {
     @Autowired
     private DynamicPricingService dynamicPricingService;
 
-    /**
-     * Preview the dynamic price for a given room and check-in date.
-     *
-     * @param roomId      ID of the room to price
-     * @param checkInDate the intended check-in date (ISO format: YYYY-MM-DD)
-     * @return PricingResponseDTO with full factor breakdown and final price
-     */
+    //Preview the dynamic price for a given room and check-in date.
+
     @GetMapping("/calculate")
     public ResponseEntity<?> calculateDynamicPrice(
             @RequestParam Long roomId,
